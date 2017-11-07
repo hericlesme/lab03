@@ -1,23 +1,24 @@
 package entidades;
 
 public class Menu {
-	private final String NL = System.lineSeparator();
-	
+
 	public String listaOperacoes() {
-		return "(C)adastrar Contato" + NL + "(L)istar Contatos" + NL + "(E)xibir Contato" + NL + "(S)air";
+		return "(C)adastrar Contato" + Util.NL + "(L)istar Contatos" + Util.NL + "(E)xibir Contato" + Util.NL + "(S)air"
+				+ Util.NL + Util.NL + "Opção> ";
 	}
-	
+
 	public String posicao() {
 		return "Posição: ";
 	}
-	
+
 	public String nome() {
 		return "Nome: ";
 	}
-	
+
 	public String sobrenome() {
 		return "Sobrenome: ";
 	}
+
 	public String telefone() {
 		return "Telefone: ";
 	}

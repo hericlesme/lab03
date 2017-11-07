@@ -1,32 +1,51 @@
 package entidades;
 
-import java.util.Scanner;
-
 public class Main {
+
+	static Menu menu = new Menu();
+	static Agenda agenda = new Agenda();
+
 	public static void main(String[] args) {
-		Menu menu = new Menu();
-		Agenda agenda = new Agenda();
+
 		String operacao = new String();
-		Scanner input = new Scanner(System.in);
 		do {
-			System.out.println(menu.listaOperacoes());
-			operacao = input.nextLine();
-			switch(operacao) {
+			System.out.print(menu.listaOperacoes());
+			operacao = Util.leString();
+			switch (operacao) {
 			case "C":
-				System.out.print(menu.posicao());
-				int pos = input.nextInt();
-				System.out.print(menu.nome());
-				String nome = input.nextLine();
-				System.out.print(menu.sobrenome());
-				String sobrenome = input.nextLine();
-				System.out.print(menu.telefone());
-				String telefone = input.nextLine();
-				agenda.cadastraContato(nome, sobrenome, pos, telefone);
+				cadastro();
+				break;
+
 			case "L":
-				agenda.listaContatos();
+				System.out.println(agenda.listaContatos());
+				break;
+
+			case "E":
+				int pos = Util.leInt();
+				System.out.println(agenda.pesquisaContato(pos));
+				break;
+
+			default:
+				System.out.println("OPÇÃO INVÁLIDA!" + Util.NL);
+				break;
 			}
 		} while (!operacao.equals("S"));
-	
-		input.close();
+	}
+
+	private static void cadastro() {
+		System.out.print(menu.posicao());
+		int pos = Util.leInt();
+		Util.leString();
+
+		System.out.print(menu.nome());
+		String nome = Util.leString();
+
+		System.out.print(menu.sobrenome());
+		String sobrenome = Util.leString();
+
+		System.out.print(menu.telefone());
+		String telefone = Util.leString();
+
+		agenda.cadastraContato(nome, sobrenome, pos, telefone);
 	}
 }
