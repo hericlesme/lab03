@@ -13,6 +13,8 @@ public class Util {
 	}
 	
 	public static int leInt() {
-		return input.nextInt();
+		int retorno = input.nextInt();
+		input.nextLine();
+		return retorno;
 	}
 }

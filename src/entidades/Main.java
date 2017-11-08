@@ -35,7 +35,6 @@ public class Main {
 	private static void cadastro() {
 		System.out.print(menu.posicao());
 		int pos = Util.leInt();
-		Util.leString();
 
 		System.out.print(menu.nome());
 		String nome = Util.leString();
