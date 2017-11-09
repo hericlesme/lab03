@@ -22,11 +22,17 @@ public class Main {
 
 			case "E":
 				int pos = Util.leInt();
-				System.out.println(agenda.pesquisaContato(pos));
+				try {
+					System.out.println(agenda.pesquisaContato(pos));
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 
 			default:
-				System.out.println("OPÇÃO INVÁLIDA!" + Util.NL);
+				if (!operacao.equals("S")) {
+					System.out.println("OPÇÃO INVÁLIDA!" + Util.NL);
+				}
 				break;
 			}
 		} while (!operacao.equals("S"));
@@ -44,7 +50,10 @@ public class Main {
 
 		System.out.print(menu.telefone());
 		String telefone = Util.leString();
-
-		agenda.cadastraContato(nome, sobrenome, pos, telefone);
+		try {
+			agenda.cadastraContato(nome, sobrenome, pos, telefone);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

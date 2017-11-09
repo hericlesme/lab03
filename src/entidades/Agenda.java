@@ -4,24 +4,44 @@ public class Agenda {
 
 	private Contato[] contatos = new Contato[100];
 
-	public void cadastraContato(String nome, String sobrenome, int pos, String telefone) {
+	public String cadastraContato(String nome, String sobrenome, int pos, String telefone) throws Exception {
+
+		if (nome == null || sobrenome == null) {
+			throw new NullPointerException("Nome Nulo!");
+		}
+		if (nome.trim().equals("") || sobrenome.trim().equals("")) {
+			throw new IllegalArgumentException("Nome Vazio!");
+		}
+
+		if (telefone == null) {
+			throw new NullPointerException("Telefone Nulo!");
+		}
+		if (telefone.trim().equals("")) {
+			throw new IllegalArgumentException("Telefone Vazio");
+		}
+
 		if (indiceValido(pos)) {
 			contatos[pos - 1] = new Contato(nome, sobrenome, telefone);
-			System.out.println("CADASTRO REALIZADO!" + Util.NL);
+			return ("Cadastro Realizado!" + Util.NL);
 		} else {
-			System.out.println("POSIÇÃO INVÁLIDA!");
+			throw new IllegalArgumentException("Posição Inválida!");
 		}
 
 	}
 
-	public String pesquisaContato(int pos) {
+	private boolean indiceValido(int pos) {
+		return !(pos < 1 || pos > 100);
+	}
+
+	public String pesquisaContato(int pos) throws Exception {
+
 		if (indiceValido(pos)) {
 			if (contatos[pos - 1] != null) {
 				return contatos[pos - 1].toString();
 			}
-			return "CONTATO NÃO EXISTE!";
+			return "Contato não existe!";
 		} else {
-			return "POSIÇÃO INVÁLIDA!";
+			throw new IllegalArgumentException("Posição Inválida!");
 		}
 	}
 
@@ -33,10 +53,6 @@ public class Agenda {
 			}
 		}
 		return listaDeContatos;
-	}
-
-	private boolean indiceValido(int pos) {
-		return !(pos < 1 || pos > 100);
 	}
 
 }
