@@ -40,20 +40,35 @@ public class Main {
 
 	private static void cadastro() {
 		System.out.print(menu.posicao());
-		int pos = Util.leInt();
 
-		System.out.print(menu.nome());
-		String nome = Util.leString();
+		int pos = 0;
+		String nome = "";
+		String sobrenome = "";
 
-		System.out.print(menu.sobrenome());
-		String sobrenome = Util.leString();
-
-		System.out.print(menu.telefone());
-		String telefone = Util.leString();
 		try {
-			agenda.cadastraContato(nome, sobrenome, pos, telefone);
+			pos = Util.leInt();
+		} catch (Exception e) {
+			System.out.println("ops, lascou");
+			Util.input.nextLine();
+			return;
+		}
+
+		try {
+			System.out.print(menu.nome());
+			nome = Util.leString();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		try {
+			System.out.print(menu.sobrenome());
+			sobrenome = Util.leString();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		System.out.print(menu.telefone());
+		String telefone = Util.leString();
+
+		System.out.println(agenda.cadastraContato(nome, sobrenome, pos, telefone));
 	}
 }

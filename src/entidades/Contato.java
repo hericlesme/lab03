@@ -8,6 +8,10 @@ public class Contato {
 
 	public Contato(String nome, String sobrenome, String telefone) {
 
+		if (nome == null || sobrenome == null || nome.trim().equals("") || sobrenome.trim().equals("")) {
+			throw new NullPointerException("Nome Inválido!");
+		}
+
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.telefone = telefone;
