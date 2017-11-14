@@ -1,5 +1,7 @@
 package entidades;
 
+import java.util.Arrays;
+
 public class Agenda {
 
 	private Contato[] contatos = new Contato[100];
@@ -9,7 +11,7 @@ public class Agenda {
 			contatos[pos - 1] = new Contato(nome, sobrenome, telefone);
 			return ("Cadastro Realizado!" + Util.NL);
 		} else {
-			throw new NullPointerException("Posição Inválida!");
+			return "Posição Inválida!";
 		}
 
 	}
@@ -18,7 +20,7 @@ public class Agenda {
 		return !(pos < 1 || pos > 100);
 	}
 
-	public String pesquisaContato(int pos) throws Exception {
+	public String pesquisaContato(int pos) {
 
 		if (indiceValido(pos)) {
 			if (contatos[pos - 1] != null) {
@@ -26,7 +28,7 @@ public class Agenda {
 			}
 			return "Contato não existe!";
 		} else {
-			throw new NullPointerException("Posição Inválida!");
+			return "Posição Inválida!";
 		}
 	}
 
@@ -39,5 +41,29 @@ public class Agenda {
 		}
 		return listaDeContatos;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(contatos);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Agenda other = (Agenda) obj;
+		if (!Arrays.equals(contatos, other.contatos))
+			return false;
+		return true;
+	}
+	
+	
 
 }

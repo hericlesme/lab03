@@ -45,13 +45,7 @@ public class Main {
 		String nome = "";
 		String sobrenome = "";
 
-		try {
-			pos = Util.leInt();
-		} catch (Exception e) {
-			System.out.println("ops, lascou");
-			Util.input.nextLine();
-			return;
-		}
+		pos = Util.leInt();
 
 		try {
 			System.out.print(menu.nome());
