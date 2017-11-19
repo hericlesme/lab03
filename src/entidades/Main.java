@@ -1,5 +1,13 @@
 package entidades;
 
+/**
+ * Classe principal do sistema
+ * 
+ * Lab03 - Laboratório de Programação II
+ * 
+ * @author Héricles Emanuel - 117110647
+ *
+ */
 public class Main {
 
 	static Menu menu = new Menu();
@@ -22,10 +30,14 @@ public class Main {
 
 			case "E":
 				int pos = Util.leInt();
-				try {
-					System.out.println(agenda.pesquisaContato(pos));
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
+				if (pos >= 1 || pos <= 100) {
+					if (agenda.contatoExiste(pos)) {
+						System.out.println(agenda.pesquisaContato(pos));
+					} else {
+						System.out.println("Contato não existe!");
+					}
+				} else {
+					System.out.println("Posição Inválida!");
 				}
 				break;
 
@@ -38,31 +50,27 @@ public class Main {
 		} while (!operacao.equals("S"));
 	}
 
+	/**
+	 * Lê os dados de entrada, cria e cadastra um contato na agenda a partir deles,
+	 * caso sejam válidos.
+	 */
 	private static void cadastro() {
 		System.out.print(menu.posicao());
+		int pos = Util.leInt();
 
-		int pos = 0;
-		String nome = "";
-		String sobrenome = "";
+		System.out.print(menu.nome());
+		String nome = Util.leString();
 
-		pos = Util.leInt();
-
-		try {
-			System.out.print(menu.nome());
-			nome = Util.leString();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		try {
-			System.out.print(menu.sobrenome());
-			sobrenome = Util.leString();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		System.out.print(menu.sobrenome());
+		String sobrenome = Util.leString();
 
 		System.out.print(menu.telefone());
 		String telefone = Util.leString();
 
-		System.out.println(agenda.cadastraContato(nome, sobrenome, pos, telefone));
+		try {
+			System.out.println(agenda.cadastraContato(nome, sobrenome, pos, telefone));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
